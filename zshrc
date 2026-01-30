@@ -28,6 +28,7 @@ alias vm='vim main.tex'
 alias vn='vim /Users/shman/Desktop/postdoc/notepad.md' 
 alias vvrc='vim /Users/shman/.vimrc' 
 alias vzrc='vim /Users/shman/.zshrc' 
+alias vtrc='vim /Users/shman/.vim/ftplugin/tex.vim'  
 # alias ls='ls -G'
 alias refresh='source ~/.zshrc'
 alias p='uv run'
@@ -58,6 +59,14 @@ function dtuget() {
   ~/.bashscripts/dtuSCPReceive.sh -s $1 -t $2 
 }
 
+function oscget() {
+  ~/.bashscripts/dtuSCPReceive.sh -s oscillators/$1 -t $2 
+}
+
+function cicget() {
+  ~/.bashscripts/dtuSCPReceive.sh -s cic/$1 -t $2 
+}
+
 function supersplit() {
   ~/.bashscripts/superSplit.sh -i $1 -n $2 -o $3 
 }
@@ -73,6 +82,18 @@ function supersplitdir() {
   done
 }
 
+function splitany() {
+  ~/.bashscripts/split_any.sh "$@"
+}
+
+function splitmany() {
+  ~/.bashscripts/split_many.sh "$@"
+}
+
+function splithere() {
+  ~/.bashscripts/split_any_here.sh "$@"
+}
+
 function splitlast() {
   ~/.bashscripts/splitLast.sh -i $1 -n $2 -o $3 
 }
@@ -86,6 +107,14 @@ function tikzupload() {
   pactivate
   ~/.bashscripts/tikzFromMany.sh -i $1 -n $2
 
+}
+
+function mkexpdir() {
+  ~/.bashscripts/makeExpDir.sh
+}
+
+function fetchresults() {
+  ~/.bashscripts/dtu_SCP_mirroring_directory.sh
 }
 
 function tidynames() {
