@@ -18,6 +18,7 @@ Installation of all is relatively straightforward. Only exception was configurin
 - p10k.zsh - powershell 10k config
 - vim/ftplugin/markdown.vim - markdown specific vim config (must be placed in .vim/ftplugin for vim to find)
 - vim/ftplugin/tex.vim - latex specific vim config (must be placed in .vim/ftplugin for vim to find)
+```text
 - bashscripts/ 
    ├──dtuSCPReceive.sh - quick scp to get file from dtu hpc, requires vpn and directs to [usernumber]/projects as root
    ├──dtuSCPSend.sh - send file to hpc, same as above
@@ -31,4 +32,4 @@ Installation of all is relatively straightforward. Only exception was configurin
    ├──split\_many.sh - split many res.dat files using the above files, same arguments. Assumes files live in set1....setn dirs 
    ├──tikzFromFile.sh - take sufficient rows of data from file to new file for tikz plots without getting so much data to crash tikz
    ├──tikzFromMany.sh - take sufficient rows of data from multiple files to new file for tikz plots without getting so much data to crash tikz
-
+```
