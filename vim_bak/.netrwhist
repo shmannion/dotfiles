@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/shman/Desktop/postdoc/cic/out/exp_53/facebook_new_sites/hom_b'
+let g:netrw_dirhist_6='/Users/shman/Desktop/postdoc/cic/out/exp_53/facebook_artists/hom_b'
+let g:netrw_dirhist_5='/Users/shman/Desktop/postdoc/cic_publication_plots/plotting'
+let g:netrw_dirhist_4='/Users/shman/Desktop/postdoc/cic/hpc'
+let g:netrw_dirhist_3='/Users/shman/Desktop/postdoc/dpr_review_plotting/plotting/src/original_plots/deezer_negative'
+let g:netrw_dirhist_2='/Users/shman/Desktop/postdoc/dpr_review_plotting/plotting/src/original_plots/airport_positive'
+let g:netrw_dirhist_1='/Users/shman/Desktop/postdoc/dpr_review_plotting/plotting'
+let g:netrw_dirhist_0='/Users/shman/Desktop/postdoc/cic/out/empirical_nets/gowalla/hom_b'
+let g:netrw_dirhist_9='/Users/shman/Desktop/postdoc/cic/hpc'
+let g:netrw_dirhist_8='/Users/shman/Desktop/postdoc/cic/out/empirical_nets/facebook/out_4_1/keep'

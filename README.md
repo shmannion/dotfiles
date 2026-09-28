@@ -6,6 +6,7 @@ Backups of my terminal/vim configuration files. For use with/requires:
 - latexmk
 - powershell10kzsh (a zshell theme that includes my colorscheme)
 - coc.vim
+- csv.vim
 - node.js
 - vim.surround
 - vim.commentary

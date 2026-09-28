@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 TYPE [TYPE ...]"
+    exit 1
+fi
+
+TYPES="$@"
+
+for TYPE in $TYPES; do
+
+    OUTFIG="fig_${TYPE}.plt"
+
+    echo "Creating $OUTFIG"
+
+    # ----------------------------------------
+    # header
+    # ----------------------------------------
+
+    cat > "$OUTFIG" <<EOF
+set encoding utf8
+set datafile separator ','
+set key spacing 1.5
+
+set xlabel "Time"
+set ylabel "$TYPE"
+
+plot \\
+EOF
+
+    # ----------------------------------------
+    # collect plot lines
+    # ----------------------------------------
+
+    for fig in set*/${TYPE}/fig.plt; do
+
+        [ -f "$fig" ] || continue
+
+        setdir="$(dirname "$fig")"
+
+        while IFS= read -r line; do
+            echo "$line"
+            # plotting lines only
+            if [[ $line =~ ^[[:space:]]*(p[[:space:]]+)?\" ]]; then
+            # if [[ "$line" =~ ^[[:space:]]*(p[[:space:]]+|)[\"] ]]; then
+                echo "$line"
+                newline="${line#p }"
+
+                # rewrite file path
+                newline="${newline/\"/\"$setdir/}"
+
+                # prefix legend title
+                newline="${newline/title \"/title \"$setdir – }"
+
+                echo "  $newline" >> "$OUTFIG"
+            fi
+
+        done < "$fig"
+
+    done
+
+done
+

@@ -6,6 +6,7 @@ Plug 'lervag/vimtex'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'chrisbra/csv.vim'
 call plug#end()
 
 " Use Enter to confirm completion (Coc)
@@ -35,16 +36,18 @@ set hlsearch
 set tabstop=2
 set expandtab
 set shiftwidth=2
-
+set splitbelow
+set splitright
 set autoindent
 set showmatch
 
 nnoremap <CR> :noh<CR><CR>
 " nnoremap <C-l> $
 set ruler
-set textwidth=120
+" set textwidth=120
+set textwidth=0
 set nowrap
-set textwidth=0 wrapmargin=0
+" set textwidth=0 wrapmargin=0
 
 " Don't show compiler messages unless errors
 " let g:vimtex_quickfix_mode = 0
@@ -62,10 +65,10 @@ let g:vimtex_view_automatic = 1
 let g:vimtex_view_skim_sync = 1
 let g:vimtex_view_skim_activate = 1
 
-augroup latex_wrapping
-  autocmd!
-  autocmd FileType tex setlocal textwidth=120 formatoptions+=t linebreak
-augroup END
+" augroup latex_wrapping
+"   autocmd!
+"   autocmd FileType tex setlocal textwidth=120 formatoptions+=t linebreak
+" augroup END
 
 command! Md execute '!open -a "MacDown" ' . shellescape(expand('%:p'))
 

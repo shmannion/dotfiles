@@ -1,0 +1,109 @@
+
+" ================================
+" File: ~/.vim/ftplugin/tex.vim
+" Purpose: LaTeX settings for Vim + VimTeX + pgfplots workflows
+" ================================
+if !exists('*vimtex#init')
+  finish
+endif
+" --- Theme ---
+colorscheme gruvbox
+set background=dark
+
+" --- Disable red underscore highlights for '_' outside math mode ---
+autocmd FileType tex syntax clear texError
+
+" --- Basic text layout ---
+setlocal wrap
+setlocal linebreak
+setlocal breakat=\ \	;,!?()
+setlocal colorcolumn=120
+setlocal textwidth=0
+
+" --- Enable spellcheck (optional) ---
+setlocal spell spelllang=en
+
+" ============================
+" Latexmk compiler configuration
+" ============================
+" Default (for main document)
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-pdf',
+      \   '-interaction=nonstopmode',
+      \   '-synctex=1',
+      \   '-outdir=.build'
+      \ ],
+      \}
+
+" --- For plotting subprojects, force rebuild every time ---
+if expand('%:p') =~ '/plotting/'
+  let g:vimtex_compiler_latexmk = {
+        \ 'options' : [
+        \   '-pdf',
+        \   '-interaction=nonstopmode',
+        \   '-synctex=1',
+        \   '-outdir=.build',
+        \   '-g'
+        \ ],
+        \}
+endif
+
+" ============================
+" Auto-move compiled PDFs
+" ============================
+
+function! MovePdfBasedOnContext(status) abort
+  if a:status != 0
+    echom "Build failed — skipping PDF move"
+    return
+  endif
+
+  let l:texname = expand('%:t:r')
+  let l:srcdir = expand('%:p:h')
+
+  " --- Plotting subprojects: move to main src/plotpdfs ---
+  if l:srcdir =~# '/plotting/.*/src$'
+    let l:build_pdf = l:srcdir . '/.build/' . l:texname . '.pdf'
+    let l:out_pdf   = l:srcdir . '/../../../src/plotpdfs/' . l:texname . '.pdf'
+
+  " --- Main project ---
+  elseif l:srcdir =~# '/src$'
+    let l:build_pdf = l:srcdir . '/.build/' . l:texname . '.pdf'
+    let l:out_pdf   = l:srcdir . '/../out/' . l:texname . '.pdf'
+
+  else
+    echom "No matching path pattern for " . l:srcdir
+    return
+  endif
+
+  if filereadable(l:build_pdf)
+    call mkdir(fnamemodify(l:out_pdf, ':h'), 'p')
+    silent execute '!mv ' . shellescape(l:build_pdf) . ' ' . shellescape(l:out_pdf)
+    echom 'Moved PDF -> ' . l:out_pdf
+  else
+    echom 'PDF not found at: ' . l:build_pdf
+  endif
+endfunction
+
+augroup VimtexSmartMover
+  autocmd!
+  autocmd User VimtexEventCompileSuccess call MovePdfBasedOnContext(v:event.status)
+augroup END
+
+" ============================
+" Cleanup temp files on exit
+" ============================
+augroup tex_clean
+  autocmd!
+  autocmd VimLeave *.tex silent !latexmk -c -outdir=.build
+augroup END
+
+
+" ===========================================
+" Some mappings for latex to make life easier
+" ==========================================
+" Insert an equation environment: type ,eq in insert mode
+
+inoremap <buffer> ,eq \begin{equation}<CR><CR>\end{equation}<Esc>kA
+

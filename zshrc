@@ -19,6 +19,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 alias g='gnuplot'
+alias mdkir='mkdir'
 alias pt='p test.py'
 alias vt='vim test.py'
 alias ls='ls --color=auto -hF'
@@ -115,6 +116,10 @@ function mkexpdir() {
 
 function fetchresults() {
   ~/.bashscripts/dtu_SCP_mirroring_directory.sh
+}
+
+function syncmendeley() {
+  ~/.bashscripts/copy_pdfs.sh
 }
 
 function tidynames() {

@@ -1,0 +1,19 @@
+{
+  "coc.source.vimtex.enabled": true,
+  "suggest.noselect": false,
+
+  "pyright.inlayHints.enable": false,
+  "pyright.inlayHints.parameterNames": false,
+  "pyright.inlayHints.parameterTypes": false,
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.typeCheckingMode": "strict",
+  "pyright.disableCompletionOfUnimportedSymbols": true,
+  "python.analysis.extraPaths": ["."],
+
+  "diagnostic.displayByAle": false,
+  "diagnostic.enableSign": false
+  "coc.source.around.enable": false,
+  "coc.source.buffer.enable": false
+}
+
